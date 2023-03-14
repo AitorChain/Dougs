@@ -1,4 +1,5 @@
 import AlphabeticOrderIcon from './AlphabeticOrder.svg';
 import ThreeBoxesIcon from './ThreeBoxes.svg';
+import SearchIcon from './Search.svg';
 
-export { AlphabeticOrderIcon, ThreeBoxesIcon };
+export { AlphabeticOrderIcon, ThreeBoxesIcon, SearchIcon };
