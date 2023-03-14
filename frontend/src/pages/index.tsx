@@ -3,6 +3,7 @@ import type { HeadFC, PageProps } from 'gatsby';
 import { AlphabeticOrderIcon, ThreeBoxesIcon } from '../images/icons';
 import { ActionButton, SelectButton } from '../components/UI/Buttons';
 import Tag from '../components/UI/Tag';
+import CategoryPreview from '../components/CategoryPreview';
 
 const IndexPage: React.FC<PageProps> = () => {
 	return (
@@ -30,6 +31,15 @@ const IndexPage: React.FC<PageProps> = () => {
 			<Tag
 				color='yellow'
 				text='Opérations diverses'
+			/>
+			<CategoryPreview
+				title='Construction ou acquisition de bâtiment (Avec TVA)'
+				description='Aménagements ou agencements du local, tels que : travaux de second oeuvre, peinture, plomberie, électricité.'
+			/>
+			<CategoryPreview
+				title='Construction ou acquisition de bâtiment (Avec TVA)'
+				description='Carburant pour votre <em>véhicule professionnel</em> ou <em>véhicule de location</em>. Attention, vous ne pouvez pas payer le carburant pour un véhicule personnel, dans ce cas, utilisez la catégorie «&nbsp;Retrait ou dépense pour usage personnel&nbsp;».'
+				showCategoryTag
 			/>
 		</main>
 	);

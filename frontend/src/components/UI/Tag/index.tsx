@@ -9,7 +9,7 @@ interface TagProps {
 const Tag = ({ color, text }: TagProps) => {
 	return (
 		<span
-			className={classNames('rounded-full text-sm leading-4 px-3 py-0.5', {
+			className={classNames('rounded-full text-sm leading-4 px-3 py-0.5 w-fit', {
 				'bg-lightGray text-blue'     : color === 'blue',
 				'bg-lightRed text-red'       : color === 'red',
 				'bg-lightYellow text-yellow' : color === 'yellow',
