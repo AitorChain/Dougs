@@ -5,6 +5,7 @@ import { categoriesApi } from './categories.api';
 
 const fetchAllCategories = () => {
 	const [categories, setCategories] = useState<AdaptedCategory[] | null>(null);
+	const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
 	const getCategories = () => {
 		categoriesApi
@@ -17,14 +18,15 @@ const fetchAllCategories = () => {
 					setCategories(adaptedCategories);
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.log(err))
+			.finally(() => setIsLoadingCategories(false));
 	};
 
 	useEffect(() => {
 		getCategories();
 	}, []);
 
-	return { allCategories: categories };
+	return { allCategories: categories, isLoadingCategories };
 };
 
 export default fetchAllCategories;

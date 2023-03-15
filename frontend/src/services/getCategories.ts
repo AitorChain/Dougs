@@ -1,21 +1,21 @@
-import _ from 'lodash';
 import fetchVisibleCategories from '../services/fetchVisibleCategories';
 import fetchAllCategories from '../services/fetchAllCategories';
+import extractCategoryGroups from '../utils/extractCategoryGroups';
+import extractVisibleCategories from '../utils/extractVisibleCategories';
+import { AdaptedCategory, VisibleCategory } from '../models/categories.types';
 
 const getCategories = () => {
-	const { allCategories } = fetchAllCategories();
+	const { allCategories, isLoadingCategories } = fetchAllCategories();
 	const { visibleCategories } = fetchVisibleCategories();
-	//Here i build an array with the ids of the visible categories
-	const arrayOfVisibleCategories = visibleCategories?.flatMap((i) => i.id);
-	//Now we can build a new array of objects by filtering those categories that matchs with the visible categories
-	const categories = allCategories?.filter((cat) =>
-		arrayOfVisibleCategories?.includes(cat.id)
+
+	const categories = extractVisibleCategories(
+		visibleCategories as VisibleCategory[],
+		allCategories as AdaptedCategory[]
 	);
 
-	const extractCategoryGroups = _.map(categories, 'group');
-	const categoryGroups = _.uniqBy(extractCategoryGroups, 'id');
+	const categoryGroups = extractCategoryGroups(categories);
 
-	return { categories, categoryGroups };
+	return { categories, isLoadingCategories, categoryGroups };
 };
 
 export default getCategories;

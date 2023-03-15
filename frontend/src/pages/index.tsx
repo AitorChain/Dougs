@@ -1,22 +1,19 @@
 import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
 import Navbar from '../components/Navbar';
-import SearchSection from '../modules/SearchSection';
 import { MainLayout } from '../components/UI/Layout';
-import CategoryList from '../components/CategoryList';
-import getCategories from '../services/getCategories';
+import { CategoriesProvider } from '../contexts/CategoriesProvider';
+import { Categories, SearchSection } from '../modules';
 
 const IndexPage: React.FC<PageProps> = () => {
-	const { categories, categoryGroups } = getCategories();
-
 	return (
-		<>
+		<CategoriesProvider>
 			<Navbar />
 			<MainLayout>
 				<SearchSection />
-				{categories && <CategoryList categories={categories} />}
+				<Categories />
 			</MainLayout>
-		</>
+		</CategoriesProvider>
 	);
 };
 

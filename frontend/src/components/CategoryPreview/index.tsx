@@ -22,7 +22,7 @@ const CategoryPreview = ({
 	return (
 		<div
 			className={classNames(
-				'flex flex-col justify-center gap-2 p-4 text-ellipsis bg-white cursor-pointer hover:bg-[#F3F5F8]',
+				'flex flex-col justify-center gap-2 p-4 text-ellipsis bg-white cursor-pointer hover:bg-[#F3F5F8] gridBorders',
 				{
 					'border-blue bg-[#F3F5F8]' : isSelected,
 					'min-h-[115px]'            : showCategoryTag,
