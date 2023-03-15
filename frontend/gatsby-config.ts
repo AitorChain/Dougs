@@ -14,6 +14,9 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-postcss',
 		},
 		{
+			resolve: 'gatsby-plugin-sass',
+		},
+		{
 			resolve : 'gatsby-plugin-react-svg',
 			options : {
 				rule: {

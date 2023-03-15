@@ -4,7 +4,7 @@ import {
 	CategoryGroup,
 	GroupedByType,
 } from '../models/categories.types';
-import sortByAlphabet from '../utils/sortByAlphabet';
+import sortByAlphabet from '../utilities/sortByAlphabet';
 
 export const ORD_CATEGORY = 'Category';
 export const ORD_ALPHABETIC = 'Alphabetic';

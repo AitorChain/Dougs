@@ -16,7 +16,7 @@ const CategoryList = ({ categories, group }: CategoryListProps) => {
 	return (
 		<div
 			className={classNames({
-				'mt-[1px]': groupedBy === ORD_ALPHABETIC,
+				'border-t border-gray': groupedBy === ORD_ALPHABETIC,
 			})}
 		>
 			{group && (

@@ -1,7 +1,7 @@
 import fetchVisibleCategories from '../services/fetchVisibleCategories';
 import fetchAllCategories from '../services/fetchAllCategories';
-import extractCategoryGroups from '../utils/extractCategoryGroups';
-import extractVisibleCategories from '../utils/extractVisibleCategories';
+import extractCategoryGroups from '../utilities/extractCategoryGroups';
+import extractVisibleCategories from '../utilities/extractVisibleCategories';
 import { AdaptedCategory, VisibleCategory } from '../models/categories.types';
 
 const getCategories = () => {
