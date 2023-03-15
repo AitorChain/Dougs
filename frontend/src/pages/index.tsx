@@ -1,16 +1,22 @@
 import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
-import { AlphabeticOrderIcon, ThreeBoxesIcon } from '../images/icons';
-import { ActionButton, SelectButton } from '../components/UI/Buttons';
-import Tag from '../components/UI/Tag';
-import CategoryPreview from '../components/CategoryPreview';
-import SearchBox from '../components/SearchBox';
+import Navbar from '../components/Navbar';
+import SearchSection from '../modules/SearchSection';
+import { MainLayout } from '../components/UI/Layout';
+import CategoryList from '../components/CategoryList';
+import getCategories from '../services/getCategories';
 
 const IndexPage: React.FC<PageProps> = () => {
+	const { categories, categoryGroups } = getCategories();
+
 	return (
-		<main className='w-100 h-100 flexCenter flex-col gap-4 m-10'>
-			<SearchBox />
-		</main>
+		<>
+			<Navbar />
+			<MainLayout>
+				<SearchSection />
+				{categories && <CategoryList categories={categories} />}
+			</MainLayout>
+		</>
 	);
 };
 

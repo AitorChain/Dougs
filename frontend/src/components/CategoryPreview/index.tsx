@@ -2,28 +2,27 @@ import React from 'react';
 import classNames from 'classnames';
 import Tag from '../UI/Tag';
 import DOMPurify from 'dompurify';
+import { AdaptedCategory } from '../../models/categories.types';
 
 interface CategoryPreviewProps {
-	title: string;
-	description: string;
+	category: AdaptedCategory;
 	isSelected?: boolean;
 	showCategoryTag?: boolean;
 }
 
 const CategoryPreview = ({
-	title,
-	description,
+	category,
 	isSelected,
-	showCategoryTag = false,
+	showCategoryTag = true,
 }: CategoryPreviewProps) => {
 	const sanitazedDescription = () => ({
-		__html: DOMPurify.sanitize(description),
+		__html: DOMPurify.sanitize(category.description as string),
 	});
 
 	return (
 		<div
 			className={classNames(
-				'flex flex-col justify-center gap-2 p-4 border-2 text-ellipsis border-gray hover:bg-[#F3F5F8]',
+				'flex flex-col justify-center gap-2 p-4 text-ellipsis bg-white cursor-pointer hover:bg-[#F3F5F8]',
 				{
 					'border-blue bg-[#F3F5F8]' : isSelected,
 					'min-h-[115px]'            : showCategoryTag,
@@ -31,17 +30,19 @@ const CategoryPreview = ({
 				}
 			)}
 		>
-			{showCategoryTag && (
+			{showCategoryTag && category.group && (
 				<Tag
-					color='red'
-					text='Location, Crédit Bail & Investissement'
+					color={category.group?.color}
+					text={category.group?.name}
 				/>
 			)}
-			<h2 className='text-base text-black'>{title}</h2>
-			<p
-				className='text-base text-grayText'
-				dangerouslySetInnerHTML={sanitazedDescription()}
-			></p>
+			<h2 className='text-base text-black'>{category.title}</h2>
+			{category.description && (
+				<p
+					className='text-base text-grayText'
+					dangerouslySetInnerHTML={sanitazedDescription()}
+				></p>
+			)}
 		</div>
 	);
 };
