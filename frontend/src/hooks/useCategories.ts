@@ -21,10 +21,23 @@ const useCategories = (
 	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_CATEGORY);
 	const [selectedGroup, setSelectedGroup] = useState<CategoryGroup | null>(null);
 
-	useEffect(() => {
-		const sortedCategories = sortByAlphabet(categories);
+	const filterCategoriesByQuery = () =>
+		categories?.filter((cat) =>
+			cat.title?.toLowerCase().includes(query.toLowerCase())
+		);
 
-		setFilteredCategories(sortedCategories);
+	const filterCategoriesByQueryAndGroup = () =>
+		categories?.filter(
+			(cat) =>
+				cat.title?.toLowerCase().includes(query.toLowerCase()) &&
+				cat?.group?.id === selectedGroup?.id
+		);
+
+	const filterCategoriesByGroup = () =>
+		categories?.filter((cat) => cat?.group?.id === selectedGroup?.id);
+
+	useEffect(() => {
+		setFilteredCategories(sortByAlphabet(categories));
 	}, [isLoadingCategories]);
 
 	useEffect(() => {
@@ -35,23 +48,15 @@ const useCategories = (
 		}
 
 		if (selectedGroup === null && query.trim() !== '') {
-			newFilteredCategories = categories?.filter((cat) =>
-				cat.title?.toLowerCase().includes(query.toLowerCase())
-			);
+			newFilteredCategories = filterCategoriesByQuery();
 		}
 
-		if (selectedGroup !== null) {
-			if (query.trim() !== '') {
-				newFilteredCategories = categories?.filter(
-					(cat) =>
-						cat.title?.toLowerCase().includes(query.toLowerCase()) &&
-						cat?.group?.id === selectedGroup?.id
-				);
-			} else {
-				newFilteredCategories = categories?.filter(
-					(cat) => cat?.group?.id === selectedGroup?.id
-				);
-			}
+		if (selectedGroup !== null && query.trim() !== '') {
+			newFilteredCategories = filterCategoriesByQueryAndGroup();
+		}
+
+		if (selectedGroup !== null && query.trim() === '') {
+			newFilteredCategories = filterCategoriesByGroup();
 		}
 
 		const sortedCategories = sortByAlphabet(
@@ -65,15 +70,11 @@ const useCategories = (
 		let newFilteredCategories;
 
 		if (selectedGroup === null) {
-			newFilteredCategories = categories?.filter((cat) =>
-				cat.title?.toLowerCase().includes(query.toLowerCase())
-			);
-		} else {
-			newFilteredCategories = categories?.filter(
-				(cat) =>
-					cat.title?.toLowerCase().includes(query.toLowerCase()) &&
-					cat?.group?.id === selectedGroup?.id
-			);
+			newFilteredCategories = filterCategoriesByQuery();
+		}
+
+		if (selectedGroup !== null) {
+			newFilteredCategories = filterCategoriesByQueryAndGroup();
 		}
 
 		const sortedCategories = sortByAlphabet(
