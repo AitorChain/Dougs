@@ -71,3 +71,11 @@ h2 {
 		border-right: 1px solid #dce4ed;
 	}
 }
+
+.caret {
+	transition: all 0.3s ease-in-out;
+}
+
+.caretUp {
+	transform: rotateZ(180deg);
+}

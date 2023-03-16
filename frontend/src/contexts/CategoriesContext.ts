@@ -11,6 +11,8 @@ type CategoriesContextType = {
 	categoryGroups: CategoryGroup[] | undefined;
 	query: string | undefined;
 	groupedBy: 'Category' | 'Alphabetic';
+	selectedGroup: CategoryGroup | null;
+	setSelectedGroup: Dispatch<React.SetStateAction<CategoryGroup | null>>;
 	setQuery: Dispatch<SetStateAction<string>>;
 	setGroupedBy: Dispatch<React.SetStateAction<GroupedByType>>;
 };

@@ -19,13 +19,15 @@ const useCategories = (
 	>(categories);
 	const [query, setQuery] = useState<string>('');
 	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_ALPHABETIC);
-	const [selectedGroup, setSelectedGroup] = useState(null);
+	const [selectedGroup, setSelectedGroup] = useState<CategoryGroup | null>(null);
 
 	useEffect(() => {
 		if (groupedBy === ORD_ALPHABETIC) {
 			const sortedCategories = sortByAlphabet(categories);
 
 			setFilteredCategories(sortedCategories);
+		} else {
+			setFilteredCategories(categories);
 		}
 	}, [isLoadingCategories]);
 

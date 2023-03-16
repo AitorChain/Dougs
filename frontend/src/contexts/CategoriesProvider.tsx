@@ -6,8 +6,15 @@ import { CategoriesContext } from './CategoriesContext';
 export const CategoriesProvider = ({ children }: { children: ReactNode }) => {
 	const { categories, categoryGroups, isLoadingCategories } = getCategories();
 
-	const { filteredCategories, query, groupedBy, setQuery, setGroupedBy } =
-		useCategories(categories, categoryGroups, isLoadingCategories);
+	const {
+		filteredCategories,
+		query,
+		groupedBy,
+		setQuery,
+		setGroupedBy,
+		selectedGroup,
+		setSelectedGroup,
+	} = useCategories(categories, categoryGroups, isLoadingCategories);
 
 	return (
 		<CategoriesContext.Provider
@@ -17,6 +24,8 @@ export const CategoriesProvider = ({ children }: { children: ReactNode }) => {
 				categoryGroups,
 				query,
 				groupedBy,
+				selectedGroup,
+				setSelectedGroup,
 				setQuery,
 				setGroupedBy,
 			}}
