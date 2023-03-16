@@ -18,35 +18,67 @@ const useCategories = (
 		AdaptedCategory[] | undefined
 	>(categories);
 	const [query, setQuery] = useState<string>('');
-	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_ALPHABETIC);
+	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_CATEGORY);
 	const [selectedGroup, setSelectedGroup] = useState<CategoryGroup | null>(null);
 
 	useEffect(() => {
-		if (groupedBy === ORD_ALPHABETIC) {
-			const sortedCategories = sortByAlphabet(categories);
+		const sortedCategories = sortByAlphabet(categories);
 
-			setFilteredCategories(sortedCategories);
-		} else {
-			setFilteredCategories(categories);
-		}
+		setFilteredCategories(sortedCategories);
 	}, [isLoadingCategories]);
 
 	useEffect(() => {
-		if (groupedBy === ORD_ALPHABETIC) {
-			const sortedCategories = sortByAlphabet(
-				filteredCategories as AdaptedCategory[]
-			);
+		let newFilteredCategories;
 
-			setFilteredCategories(sortedCategories);
+		if (selectedGroup === null && query.trim() === '') {
+			newFilteredCategories = categories;
 		}
-	}, [groupedBy, query]);
 
-	useEffect(() => {
-		const filteredCategoriesByQuery = categories?.filter((cat) =>
-			cat.title?.toLowerCase().includes(query.toLowerCase())
+		if (selectedGroup === null && query.trim() !== '') {
+			newFilteredCategories = categories?.filter((cat) =>
+				cat.title?.toLowerCase().includes(query.toLowerCase())
+			);
+		}
+
+		if (selectedGroup !== null) {
+			if (query.trim() !== '') {
+				newFilteredCategories = categories?.filter(
+					(cat) =>
+						cat.title?.toLowerCase().includes(query.toLowerCase()) &&
+						cat?.group?.id === selectedGroup?.id
+				);
+			} else {
+				newFilteredCategories = categories?.filter(
+					(cat) => cat?.group?.id === selectedGroup?.id
+				);
+			}
+		}
+
+		const sortedCategories = sortByAlphabet(
+			newFilteredCategories as AdaptedCategory[]
 		);
 
-		const sortedCategories = sortByAlphabet(filteredCategoriesByQuery);
+		setFilteredCategories(sortedCategories);
+	}, [selectedGroup]);
+
+	useEffect(() => {
+		let newFilteredCategories;
+
+		if (selectedGroup === null) {
+			newFilteredCategories = categories?.filter((cat) =>
+				cat.title?.toLowerCase().includes(query.toLowerCase())
+			);
+		} else {
+			newFilteredCategories = categories?.filter(
+				(cat) =>
+					cat.title?.toLowerCase().includes(query.toLowerCase()) &&
+					cat?.group?.id === selectedGroup?.id
+			);
+		}
+
+		const sortedCategories = sortByAlphabet(
+			newFilteredCategories as AdaptedCategory[]
+		);
 
 		setFilteredCategories(sortedCategories);
 	}, [query]);
