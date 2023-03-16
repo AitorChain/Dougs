@@ -18,7 +18,7 @@ const useCategories = (
 		AdaptedCategory[] | undefined
 	>(categories);
 	const [query, setQuery] = useState<string>('');
-	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_CATEGORY);
+	const [groupedBy, setGroupedBy] = useState<GroupedByType>(ORD_ALPHABETIC);
 	const [selectedGroup, setSelectedGroup] = useState<CategoryGroup | null>(null);
 
 	const filterCategoriesByQuery = () =>

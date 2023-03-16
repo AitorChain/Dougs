@@ -1,18 +1,15 @@
 import * as React from 'react';
 import type { HeadFC, PageProps } from 'gatsby';
-import Navbar from '../components/Navbar';
-import { MainLayout } from '../components/UI/Layout';
 import { CategoriesProvider } from '../contexts/CategoriesProvider';
-import { Categories, SearchSection } from '../modules';
+import { SelectionProvider } from '../contexts/SelectionProvider';
+import { SearchCategories } from '../modules/SearchCategories';
 
 const IndexPage: React.FC<PageProps> = () => {
 	return (
 		<CategoriesProvider>
-			<Navbar />
-			<MainLayout>
-				<SearchSection />
-				<Categories />
-			</MainLayout>
+			<SelectionProvider>
+				<SearchCategories />
+			</SelectionProvider>
 		</CategoriesProvider>
 	);
 };

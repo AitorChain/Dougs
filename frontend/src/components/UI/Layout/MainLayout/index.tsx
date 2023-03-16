@@ -6,8 +6,10 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
-		<main className='w-full flexCenter bg-backgroundGray h-full'>
-			<div className='w-layout my-8 rounded border border-gray'>{children}</div>
+		<main className='w-full flex justify-center mb-12 align-top bg-backgroundGray h-full min-h-[93vh]'>
+			<div className='w-layout h-fit my-8 rounded border border-gray'>
+				{children}
+			</div>
 		</main>
 	);
 };

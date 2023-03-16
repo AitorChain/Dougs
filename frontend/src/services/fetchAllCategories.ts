@@ -16,6 +16,7 @@ const fetchAllCategories = () => {
 						createCategoryAdapter(cat)
 					);
 					setCategories(adaptedCategories);
+					setIsLoadingCategories(false);
 				}
 			})
 			.catch((err) => console.log(err))
